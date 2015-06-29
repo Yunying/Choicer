@@ -1,0 +1,62 @@
+<%- model_class = Restaurant -%>
+<div class="jumbotron foodbackground">
+        <%= link_to "I WANT TO EAT",
+      random_restaurants_path,
+    :class => "randombutton animated infinite pulse" %>
+
+</div>
+
+<script>
+jQuery(function($) {
+$("tr[data-link]").click(function() {
+window.location = this.dataset.link
+});
+})
+</script>
+
+<table class="table table-striped table-hover restaurant-list" style="text-align: left;">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:tag) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @restaurants.each do |restaurant| %>
+      <tr data-link="<%= restaurant_path(restaurant) %>">
+        <td><%= restaurant.name %></td>
+        <td><%= restaurant.address %></td>
+        <td><%= restaurant.tag %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_restaurant_path(restaurant), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      restaurant_path(restaurant),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div style="margin-left: 150px;">
+</div>
+
+<div class="row" style="margin-left: 140px; margin-right: 260px;">
+  <div class="col-xs-6 col-sm-4" >
+    <%= link_to "Add a restaurant",
+    new_restaurant_path,
+    :class => 'btn btn-primary add-new-button' %>
+  </div>
+   <div class="col-xs-6 col-sm-4"></div>
+  <div class="col-xs-6 col-sm-4" style="align:right;">
+    <form action = "/restaurants/searchyelp" class="form-inline">
+      <button type="Submit" class='btn btn-primary add-new-button pull-right' style="margin-left: 30px;">Search Yelp!</button>
+      <input type="text" name="text1" placeholder="Restaurant" class="form-control pull-right">   
+    </form>
+  </div>
+</div>

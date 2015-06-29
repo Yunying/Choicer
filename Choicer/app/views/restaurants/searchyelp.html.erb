@@ -1,0 +1,83 @@
+<%- model_class = Restaurant -%>
+<div class="jumbotron foodbackground", style="text-align: center;">
+  <h1>
+    <%= @displaytext %>
+  </h1>
+
+</div>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- <head>
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head> -->
+<body> 
+ 
+<div class="container">
+  <div class="panel-group">
+	<% @r.each do |business| %>
+      <!-- <tr>
+        <td><%= business.name %></td>
+      </tr> -->
+      <div class="panel panel-default">
+      	<div class="panel-heading">
+      		<font size="4" face="times"><%= business.name%></font>
+      	</div>
+     	<div class="panel-body">
+     		<div class="row">
+
+ 				 <div class="col-sm-3">
+ 				 	<%=image_tag business.image_url%>
+ 				 </div>
+
+ 				 <div class="col-sm-6">
+ 				 	<font size="3">
+ 				 	<%= business.location.address%><br>
+ 				 	<%= business.location.city%><br>
+ 				 	<%= business.location.state_code%>
+ 				 	<%= business.location.postal_code%> <br><br>
+ 					 </font>
+ 				 	<%=image_tag business.rating_img_url_large%>
+
+ 				 </div>
+
+ 				 <div class="col-sm-3">
+						<%= simple_form_for @newitem do |s| %>
+						<%= s.hidden_field :name, value: business.name %>
+						<%= s.hidden_field :address, value: business.location.display_address %>
+						<%= s.hidden_field :tag, value: @business_category %>
+          			    <%= s.hidden_field :zipcode, value:business.location.postal_code %>
+						<%= s.button :submit, "Add to List", :class => 'btn btn-info btn-block'%> 
+					<% end %>
+
+					<br>
+
+            <%= link_to "View in Yelp",
+            business.url,:class => "btn btn-danger btn-block" %>
+ 				 </div>
+			</div>
+
+     	</div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
+

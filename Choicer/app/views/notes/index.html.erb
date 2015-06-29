@@ -1,0 +1,24 @@
+<%- model_class = Note -%>
+
+<div class="jumbotron foodbackground">
+        <%= link_to "BACK TO HOME!",
+      restaurants_path,
+    :class => "randombutton" %>
+
+</div>
+
+<div class="panel-group" style="margin-top: 30px;">
+    <% @notes.each do |note| %>  
+      <div class="panel panel-info">
+        <div class="panel-heading"><%= note.created_at%></div>
+        <div class="panel-body"><%= note.contect%></div>
+      </div>
+    <% end %>
+
+<div>
+
+<div style="margin-top:30px;">
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_note_path,
+            :class => 'btn btn-primary' %>
+</div>

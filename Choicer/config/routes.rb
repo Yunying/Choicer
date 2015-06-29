@@ -1,7 +1,26 @@
 Rails.application.routes.draw do
+  resources :notes
+  resources :restaurants do
+    collection do
+      get 'searchyelp'
+      get 'random'
+    end
+
+    member do
+      get 'open_yelp'
+      get 'addnote'
+      post 'addnote'
+    end
+  end
+
+  get '/contact' => 'static_pages#contact'
+  get '/email' => 'static_pages#email'
+  post '/contact' => 'static_pages#email'
+
+  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root 'application#hello'
+  root 'restaurants#index'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
